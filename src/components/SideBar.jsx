@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 export default function SideBar() {
-  const [contacts, setContacts] = useState([]);
+  //const [contacts, setContacts] = useState([]);
 
+  /*
   useEffect(() => {
     axios
       .get('https://65b36193770d43aba479a2f2.mockapi.io/users')
@@ -12,6 +13,14 @@ export default function SideBar() {
         setContacts(res.data);
       });
   });
+  */
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ["contacts"],
+    queryFn: () => {
+      axios.get("https://65b36193770d43aba479a2f2.mockapi.io/users").then(response => response.data)
+    }
+  })
 
   return (
     <div id="sidebar">
